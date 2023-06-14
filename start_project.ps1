@@ -12,10 +12,10 @@ Start-Sleep -Seconds 5
 
 # Output success or failure message
 if (!$process.HasExited) {
-    Write-Host "npm start executed successfully."
+    Write-Host "Development ui started successfully."
 } else {
     $exitCode = $process.ExitCode
-    Write-Host "npm start failed with exit code: $exitCode"
+    Write-Host "Development ui failed with exit code: $exitCode"
 }
 
 Set-Location -Path $OriginalPath
