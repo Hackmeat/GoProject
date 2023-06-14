@@ -5,7 +5,7 @@ $FrontendPath = $PSScriptRoot + "\frontend\"
 Set-Location -Path $FrontendPath
 
 # Start the process and capture the process object
-$process = Start-Process -FilePath "npm" -ArgumentList "start" -PassThru
+$process = Start-Process -FilePath "npm" -ArgumentList "run dev" -PassThru
 
 # Wait for the process to start
 Start-Sleep -Seconds 5
