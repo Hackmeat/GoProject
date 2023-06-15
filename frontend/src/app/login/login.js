@@ -51,14 +51,14 @@ export default function Login() {
                 </Typography>
                 <TextField
                     margin='normal'
-                    id="outlined"
+                    id="outlined-username"
                     label="Username"
                     value={username}
                     onChange={handleChangeUsername}
                 />
                 <TextField
                     margin='normal'
-                    id="outlined"
+                    id="outlined-password"
                     type={"password"}
                     label="Password"
                     value={password}
