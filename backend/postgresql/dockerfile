@@ -1,4 +1,4 @@
 #Current latest is 14.8.0
-FROM bitnami/postgresql:latest
+FROM bitnami/postgresql:14.8.0
 EXPOSE 5432
 COPY docker-compose.yaml .
