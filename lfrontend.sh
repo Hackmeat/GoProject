@@ -1,3 +1,6 @@
+###
+# Starting the Frontend
+
 # Set path
 original_directory=$(pwd)
 
