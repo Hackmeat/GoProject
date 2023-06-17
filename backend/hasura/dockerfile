@@ -1,3 +1,4 @@
+# Current latest is 2.27.0
 FROM hasura/graphql-engine:latest
 ENV HASURA_GRAPHQL_DATABASE_URl="http://localhost:5432"
 ENV HASURA_GRAPHQL_ENABLE_CONSOLE="true"
