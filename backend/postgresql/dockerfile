@@ -1,3 +1,4 @@
 #Current latest is 14.8.0
 FROM bitnami/postgresql:latest
-ENV POSTGRES_PASSWORD="test"
+EXPOSE 5432
+COPY docker-compose.yaml .

@@ -18,22 +18,13 @@ image_hasura="hasura-image"
 # Change directory
 cd "$postgres_directory"
 
-# Check if the postgresql image exists
-if [[ "$(docker images -q ${image_postgresql} 2>/dev/null)" ]]; then
-    echo "The image ${image_postgresql} already exists."
-else
-    echo "The image ${image_postgresql} does not exist. Generating..."
-    # Build the image using the Dockerfile
-    docker build -t ${image_postgresql} .
-fi
-
 # Check if Postgresql container is running
 if [[ "$(docker ps -aq -f name=${container_postgresql})" ]]; then
     echo "Starting the container ${container_postgresql}."
     docker start ${container_postgresql}
 else
     echo "The container ${container_postgresql} does not exist. Creating..."
-    docker run -d --name ${container_postgresql} ${image_postgresql}
+    docker-compose up -d 
 fi
 
 ############
