@@ -1,4 +1,16 @@
 services:
+  postgres:
+    image: bitnami/postgresql:14.8.0
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
   redis:
     image: redis:latest
     restart: always
@@ -8,10 +20,13 @@ services:
     image: hasura/graphql-engine:v2.27.0
     ports:
       - "8080:8080"
+    depends_on:
+      - "postgres"
     restart: always
     environment:
-      HASURA_GRAPHQL_ADMIN_SECRET: v
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgresql://postgres:test123@host.docker.internal:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: test123
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:test123@postgres:5432/postgres
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test123@postgres:5432/postgres
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_LOG_LEVEL: warn
@@ -19,3 +34,5 @@ services:
       HASURA_GRAPHQL_RATE_LIMIT_REDIS_URL: "redis://redis:6379"
 volumes:
   db_data:
+
+  pgdata:
