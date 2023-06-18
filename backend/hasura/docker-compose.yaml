@@ -10,13 +10,12 @@ services:
       - "8080:8080"
     restart: always
     environment:
-      HASURA_GRAPHQL_ADMIN_SECRET: test123
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgresql://postgres:test123@localhost:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: v
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgresql://postgres:test123@host.docker.internal:5432/postgres
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_DEV_MODE: "true"
-      HASURA_GRAPHQL_LOG_LEVEL: info
+      HASURA_GRAPHQL_LOG_LEVEL: warn
       HASURA_GRAPHQL_REDIS_URL: "redis://redis:6379"
       HASURA_GRAPHQL_RATE_LIMIT_REDIS_URL: "redis://redis:6379"
-      HASURA_GRAPHQL_MAX_CACHE_SIZE: "200"
 volumes:
   db_data:
