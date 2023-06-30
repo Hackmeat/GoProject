@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useQuery, gql } from '@apollo/client';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -18,12 +19,14 @@ function a11yProps(index) {
     };
 }
 
+
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    
+
 
 
     const handleChangeUsername = (event) => {
@@ -34,8 +37,22 @@ function TabPanel(props) {
         setPassword(event.target.value);
     };
 
-    function submit() {
-        console.log(username, password);
+    const GET_LOGIN = gql`
+        query GetLoginData {
+            login {
+                password
+                username
+            }
+        }
+    `;
+
+    const { loading, error, data } = useQuery(GET_LOGIN);
+
+    function submit(kind) {
+        
+        if (loading) return 'Loading...';
+        if (error) return `Error! ${error.message}`;
+        console.log(data);
     }
 
     return (
@@ -81,7 +98,7 @@ function TabPanel(props) {
                         marginTop="10px"
                         flexDirection="column"
                     >
-                        <Button variant="outlined" size="large" onClick={() => submit()}>{props.kind}</Button>
+                        <Button variant="outlined" size="large" onClick={() => submit(props.kind)}>Confirm {props.kind}</Button>
                     </Box>
                 </Box>
             )}
@@ -96,23 +113,6 @@ export default function Login() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    
-
-
-    const handleChangeUsername = (event) => {
-        setUsername(event.target.value);
-    };
-
-    const handleChangePassword = (event) => {
-        setPassword(event.target.value);
-    };
-
-    function submitLogin() {
-        console.log(username, password);
-    }
 
     return (
         <Box
@@ -140,38 +140,12 @@ export default function Login() {
                 <TabPanel value={value} index={0} kind={"login"}>
 
                 </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <Typography variant="h5" gutterBottom align='center' margin="0">
-                        Welcome
-                    </Typography>
-                    <Typography variant="h5" gutterBottom align='center'>
-                        Please Register
-                    </Typography>
-                    <TextField
-                        margin='normal'
-                        id="outlined-username"
-                        label="Username"
-                        value={username}
-                        onChange={handleChangeUsername}
-                    />
-                    <TextField
-                        margin='normal'
-                        id="outlined-password"
-                        type={"password"}
-                        label="Password"
-                        value={password}
-                        onChange={handleChangePassword}
-                    />
-                    <Box
-                        display="flex"
-                        justifyContent="space-around"
-                        marginTop="10px"
-                        flexDirection="column"
-                    >
-                        <Button variant="outlined" size="large" onClick={() => submitLogin()}>Login</Button>
-                    </Box>
+                <TabPanel value={value} index={1} kind={"register"}>
+
                 </TabPanel>
-                <TabPanel value={value} index={2}></TabPanel>
+                <TabPanel value={value} index={2} kind={"recover"}>
+
+                </TabPanel>
             </Box>
             <Box></Box>
         </Box>
