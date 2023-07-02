@@ -13,7 +13,7 @@ const client = new ApolloClient({
 	link: new HttpLink({
 		uri: 'http://localhost:8080/v1/graphql',
 		headers: {
-			Authorization: `Bearer test123`
+			'x-hasura-admin-secret': `test123`
 		}
 	}),
 	cache: new InMemoryCache(),
