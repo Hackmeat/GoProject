@@ -2,7 +2,7 @@
 import { createContext } from 'react'
 
 import './page.css'
-import Login from './login/login.js'
+import LoginPanel from './login/panel.js'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,9 +30,9 @@ export default function Home() {
 		<ApolloProvider client={client}>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
-				<Login>
+				<LoginPanel>
 
-				</Login>
+				</LoginPanel>
 			</ThemeProvider>
 		</ApolloProvider>
 	)
